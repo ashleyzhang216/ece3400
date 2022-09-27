@@ -7,14 +7,10 @@
 #define L_SERVO_FB A2
 #define R_SERVO_FB A1
 
+// enum to describe movement directions of servos
 enum dir {
   FORWARD, 
   BACKWARD
-};
-
-enum turn_dir {
-  LEFT, 
-  RIGHT
 };
 
 // Create the servo objects
@@ -25,16 +21,11 @@ Servo R_servo;
 int L_servo_fb;
 int R_servo_fb;
 
-const float robot_diam = 5.75;
-const float wheel_diam = 2.75;
-
-const int max_fb_value = 720;
-
 void setup() {
   // put your setup code here, to run once:
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT); // configure onboard LED to be able to turn on
 
-  Serial.begin(9600);
+  Serial.begin(9600); // allow for debug console
   
   L_servo.attach(L_SERVO); // Attach left servo to its pin
   R_servo.attach(R_SERVO); // Attach right servo to its pin
@@ -47,12 +38,13 @@ void setup() {
 }
 
 void print_servo_fb() {
-  L_servo_fb = analogRead(L_SERVO_FB);
-  R_servo_fb = analogRead(R_SERVO_FB);
+  L_servo_fb = analogRead(L_SERVO_FB); // read feedback value from left servo
+  R_servo_fb = analogRead(R_SERVO_FB); // read feedback value from right servo
 
-  Serial.println("Left " + String(L_servo_fb) + " : " + " Right " + String(R_servo_fb));
+  Serial.println("Left " + String(L_servo_fb) + " : " + " Right " + String(R_servo_fb)); // print out feedback values
 }
 
+// move left servo in specified direction at specified power
 void move_L(dir d, int power) {
   assert(power >= 0 && power <= 100);
   if(d == FORWARD) {
@@ -64,6 +56,7 @@ void move_L(dir d, int power) {
   }
 }
 
+// move right servo in specified direction at specified power
 void move_R(dir d, int power) {
   assert(power >= 0 && power <= 100);
   if(d == FORWARD) {
@@ -75,23 +68,7 @@ void move_R(dir d, int power) {
   }
 }
 
-// left increasing right decreasing
-
-// UNUSED
-void turn(turn_dir d, int power, int turn_deg) {
-
-  int wheel_turn_deg = PI*robot_diam*(turn_deg/360.0)/wheel_diam*360;
-  
-  if(d == LEFT) {
-    L_servo.write(90);
-    R_servo.write(90);
-
-    
-  } else { //d == RIGHT
-    
-  }
-}
-
+// make the robot turn left 90 degrees
 void turn_L() {
   move_L(BACKWARD, 25);
   move_R(FORWARD, 25);
@@ -102,6 +79,7 @@ void turn_L() {
   R_servo.write(90);
 }
 
+// make the robot turn right 90 degrees
 void turn_R() {
   move_L(FORWARD, 25);
   move_R(BACKWARD, 25);
@@ -112,6 +90,7 @@ void turn_R() {
   R_servo.write(90);
 }
 
+// stop both the left and right servos
 void stop_LR() {
   L_servo.write(90);
   R_servo.write(90);
@@ -120,38 +99,53 @@ void stop_LR() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  // stay motionless for 5 seconds
   delay(5000);
 
+  // turn on both servos to move forward
   move_L(FORWARD, 50);
   move_R(FORWARD, 50);
 
+  // wait for bot to travel 20 cm
   delay(2000);
 
+  // stop the bot
   stop_LR();
 
+  // pause 1 second
   delay(1000);
 
+  // turn 90 degrees right
   turn_R();
 
+  // pause 1 second
   delay(1000);
 
+  // pivot 270 degrees left, by pivoting 90 degrees 3 times
   turn_L();
   turn_L();
   turn_L();
 
+  // pause 1 second
   delay(1000);
 
+  // turn on both servos to move forward
   move_L(FORWARD, 50);
   move_R(FORWARD, 50);
 
+  // wait for bot to travel 20 cm
   delay(2000);
 
+  // stop the bot
   stop_LR();
 
+  // pause 1 second
   delay(1000);
 
+  // pivot right 180 degrees by pivoting 90 degrees right twice
   turn_R();
   turn_R();
 
+  // stop, forever
   while(1) {}
 }
