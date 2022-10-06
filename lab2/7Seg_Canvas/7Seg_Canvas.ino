@@ -3,15 +3,14 @@
 
 
 // Shift register pins
-#define clockPin     // clock pin
-#define dataPin      // data pin
+#define clockPin 7 // clock pin
+#define dataPin  6 // data pin
 
 // Pins on 7-degment display, one for each digit
-#define Digit1   
-#define Digit2    
-#define Digit3    
-#define Digit4    
-
+#define Digit1   2
+#define Digit2   3
+#define Digit3   4
+#define Digit4   5
 
 byte digitBeingWritten;
 volatile int numToDisplay;
