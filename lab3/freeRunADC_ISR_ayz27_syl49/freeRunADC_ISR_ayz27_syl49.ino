@@ -1,9 +1,10 @@
 #define LOG_OUT 1 // use the log output function
 #define FFT_N 256 // set to 256 point fft
+#define interruptPin 2
 
-#include <FFT.h>
-#include <avr/io.h>
-#include <stdbool.h>
+#include <FFT.h> // for fft
+#include <avr/io.h> // for adc
+#include <stdbool.h> // for adc
 
 // temp values and value storage for ADC
 volatile uint16_t adcVal;
@@ -77,32 +78,37 @@ uint16_t ADC0_read(void)
 
 ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed interrupt
 {
-  Serial.println("Interrupt number " + String(counter) + " called!");
-  if(counter <= 256) {
-    adcVal = ADC0_read();
-    adc_vals[counter] = adcVal;
-    counter++;
-  }
+  adcVal = ADC0_read(); // read adc
+  adc_vals[counter] = adcVal; // record value
+  counter++; // increment index
   
   /* The interrupt flag has to be cleared manually */
   TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
 }
 
+void override_button_func() {
+  Serial.println("Override button pressed!");
+}
+
 void setup() {
   // put your setup code here, to run once:
 
+  // for printing later
   Serial.begin(9600);
   
   adc_setup();
   interrupt_setup();
+
+  attachInterrupt(digitalPinToInterrupt(interruptPin), override_button_func, FALLING);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
+  // when we get all of the adc values
   if(counter > 256) {
     // disable TCA
-    cli();
+    TCA0.SINGLE.CTRLA = ~TCA_SINGLE_ENABLE_bm;
 
     // restore ADC values
     ADC0.CTRLA = temp_ctrla;
@@ -128,5 +134,5 @@ void loop() {
 
     // do nothing
     while(1) {}
-  }
+  } 
 }
