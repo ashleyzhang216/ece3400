@@ -4,13 +4,22 @@ C:\Users\swift\AppData\Local\TempReleases\Snapshot\1\Fabrication\Pick Place\Pick
 ========================================================================================================================
 File Design Information:
 
-Date:       20/11/22
-Time:       23:52
+Date:       22/11/22
+Time:       00:36
 Revision:   Not in VersionControl
 Variant:    No variations
 Units used: mil
 
 ﻿Designator Comment                 Layer    Footprint                  Center-X(mil) Center-Y(mil) Rotation Description                                                                                        
+J10        "Motor Feedback"        TopLayer FP-M20-9990246-MFG         3375.000      1925.000      180      "CONN HEADER VERT 2POS 2.54MM"                                                                     
+R40        270                     TopLayer RESC1609X50X30NL8T20       2715.000      1785.000      90       "Chip Resistor, 10 KOhm, +/- 1%, 100 mW, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel" 
+R39        1.5k                    TopLayer RESC1609X50X30NL8T20       2715.000      1675.591      90       "Chip Resistor, 10 KOhm, +/- 1%, 100 mW, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel" 
+R38        270                     TopLayer RESC1609X50X30NL8T20       3325.000      1750.000      90       "Chip Resistor, 10 KOhm, +/- 1%, 100 mW, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel" 
+R37        1.5k                    TopLayer RESC1609X50X30NL8T20       3325.000      1640.000      90       "Chip Resistor, 10 KOhm, +/- 1%, 100 mW, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel" 
+C10        0.1uF                   TopLayer CAPC2013X145X50LL20T25     2615.000      1672.559      90       ""                                                                                                 
+C9         1uF                     TopLayer CAPC2013X145X50LL20T25     2615.000      1785.000      270      ""                                                                                                 
+C8         0.1uF                   TopLayer CAPC2013X145X50LL20T25     3425.000      1637.559      90       ""                                                                                                 
+C7         1uF                     TopLayer CAPC2013X145X50LL20T25     3425.000      1750.000      90       ""                                                                                                 
 MH3        M3                      TopLayer PTH_M3                     3000.000      1000.000      0        "M3 Plated Through Hole"                                                                           
 MH2        M3                      TopLayer PTH_M3                     5000.000      3500.000      0        "M3 Plated Through Hole"                                                                           
 MH1        M3                      TopLayer PTH_M3                     1000.000      3500.000      0        "M3 Plated Through Hole"                                                                           
@@ -19,7 +28,7 @@ U3         "Op Amp"                TopLayer FP-DBV0005A-MFG            4156.181 
 U2         "Op Amp"                TopLayer Op_Amp                     4225.000      4745.000      270      ""                                                                                                 
 U1         "Arduino Nano Every"    TopLayer Arduino_Nano               2970.000      5270.000      90       ""                                                                                                 
 SW2        "VIN Power Toggle"      TopLayer FP-PCM12SMTR-MFG           4929.547      1470.945      90       "SWITCH SLIDE SPDT 300MA 6V"                                                                       
-SW1        "Manual Start Button"   TopLayer FP-PTS645SM43SMTR92LFS-MFG 2985.000      3295.000      90       "SWITCH TACTILE SPST-NO 0.05A 12V"                                                                 
+SW1        "Manual Start Button"   TopLayer FP-PTS645SM43SMTR92LFS-MFG 1560.000      1095.000      180      "SWITCH TACTILE SPST-NO 0.05A 12V"                                                                 
 R36        220                     TopLayer FP-CRCW0805-e3-MFG         2490.000      945.000       180      "RES Thick Film, 220Ω, 1%, 0.125W, 100ppm/°C, 0805"                                                
 R35        220                     TopLayer FP-CRCW0805-e3-MFG         5060.000      1820.000      270      "RES Thick Film, 220Ω, 1%, 0.125W, 100ppm/°C, 0805"                                                
 R34        220                     TopLayer FP-CRCW0805-e3-MFG         3680.000      6030.000      180      "RES Thick Film, 220Ω, 1%, 0.125W, 100ppm/°C, 0805"                                                
@@ -55,7 +64,7 @@ R5         Jumper                  TopLayer RESC2013X70X40NL20T20      3940.551 
 R4         2.2k                    TopLayer FP-CRCW0805-e3-IPC_B       4644.490      2278.012      90       "RES Thick Film, 2.2kΩ, 1%, 0.125W, 100ppm/°C, 0805"                                               
 R3         2.2k                    TopLayer FP-CRCW0805-e3-IPC_B       4165.000      930.000       180      "RES Thick Film, 2.2kΩ, 1%, 0.125W, 100ppm/°C, 0805"                                               
 R2         2.2k                    TopLayer FP-CRCW0805-e3-IPC_B       1355.000      2265.000      90       "RES Thick Film, 2.2kΩ, 1%, 0.125W, 100ppm/°C, 0805"                                               
-R1         1k                      TopLayer RESC2013X50X30NL20T20      2985.000      3050.000      180      ""                                                                                                 
+R1         1k                      TopLayer RESC2013X50X30NL20T20      1805.000      1095.000      270      ""                                                                                                 
 Q1         IRF530NSTRLPBF          TopLayer FP-PG-TO263-3-MFG          1600.000      5640.000      0        "MOSFET N-CH 100V 17A D2PAK"                                                                       
 P7         "Extra Pins"            TopLayer 61300311121                4895.000      1070.000      90       "THT Vertical Pin Header WR-PHD, Pitch 2.54 mm, Single Row, 3 pins"                                
 P6         "RF Wires"              TopLayer 61300311121                2510.000      5870.000      90       "THT Vertical Pin Header WR-PHD, Pitch 2.54 mm, Single Row, 3 pins"                                
@@ -64,7 +73,7 @@ P4         "Left Ultrasonic 2"     TopLayer SMTC-TSW-104-08-X-S        4795.000 
 P3         "Left Ultrasonic 1"     TopLayer SMTC-TSW-104-08-X-S        4795.000      3490.000      90       "0.025" SQ Post Header, Through-hole, Vertical, -55 to 125 degC, 2.54 mm Pitch, 4-Pin, Male, RoHS" 
 P2         "Right Ultrasonic"      TopLayer SMTC-TSW-104-08-X-S        1205.000      3495.000      270      "0.025" SQ Post Header, Through-hole, Vertical, -55 to 125 degC, 2.54 mm Pitch, 4-Pin, Male, RoHS" 
 P1         "Front Ultrasonic"      TopLayer SMTC-TSW-104-08-X-S        2995.000      1250.000      0        "0.025" SQ Post Header, Through-hole, Vertical, -55 to 125 degC, 2.54 mm Pitch, 4-Pin, Male, RoHS" 
-J9         Microphone              TopLayer 691103110002               2996.102      2115.000      0        "Series 1031 - 3.50 mm Horizontal Entry Modular with Pressure Clamp WR-TBL, 2 pin"                 
+J9         Microphone              TopLayer 691103110002               2996.102      1875.000      0        "Series 1031 - 3.50 mm Horizontal Entry Modular with Pressure Clamp WR-TBL, 2 pin"                 
 J8         "Right Phototransistor" TopLayer FP-M20-9990246-MFG         4759.490      2283.012      270      "CONN HEADER VERT 2POS 2.54MM"                                                                     
 J7         "Front Phototransistor" TopLayer FP-M20-9990246-MFG         4165.000      1040.000      180      "CONN HEADER VERT 2POS 2.54MM"                                                                     
 J6         "Left Phototransistor"  TopLayer FP-M20-9990246-MFG         1240.000      2265.000      90       "CONN HEADER VERT 2POS 2.54MM"                                                                     

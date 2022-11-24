@@ -2,251 +2,6 @@
 FileName = 3400_PCB_V1.GBR
 AutoAperture = True
 *************************************************************
-Generating : Top Component Center
-      File : 3400_PCB_V1_Top_Component_Center.gbr
-
-    Adding Layer      : Top Component Center
-
-
-Used DCodes :
-    D68
-*************************************************************
-
-*************************************************************
-Generating : Top Pad Master
-      File : 3400_PCB_V1_Pads_Top.gbr
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D18
-    D19
-    D20
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-    D41
-    D42
-    D44
-    D45
-    D46
-    D54
-    D55
-    D58
-    D59
-    D60
-    D61
-    D62
-    D63
-    D64
-    D65
-    D66
-*************************************************************
-
-*************************************************************
-Generating : Keep-Out Layer
-      File : 3400_PCB_V1_Keep-out.gbr
-
-    Adding Layer      : Keep-Out Layer
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
-Generating : Bottom Overlay
-      File : 3400_PCB_V1_Legend_Bot.gbr
-
-    Adding Layer      : Bottom Overlay
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
-Generating : Top Paste
-      File : 3400_PCB_V1_Paste_Top.gbr
-
-    Adding Layer      : Top Paste
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D16
-    D17
-    D18
-    D19
-    D20
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-*************************************************************
-
-*************************************************************
-Generating : Top Overlay
-      File : 3400_PCB_V1_Legend_Top.gbr
-
-    Adding Layer      : Top Overlay
-
-
-Used DCodes :
-    D10
-    D11
-    D12
-    D13
-    D14
-    D15
-*************************************************************
-
-*************************************************************
-Generating : Bottom Paste
-      File : 3400_PCB_V1_Paste_Bot.gbr
-
-    Adding Layer      : Bottom Paste
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
-Generating : Top Layer
-      File : 3400_PCB_V1_Copper_Signal_Top.gbr
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D11
-    D18
-    D19
-    D20
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-    D41
-    D42
-    D44
-    D45
-    D46
-    D54
-    D55
-    D58
-    D59
-    D60
-    D61
-    D62
-    D63
-    D64
-    D65
-    D66
-    D67
-*************************************************************
-
-*************************************************************
-Generating : Mechanical 1
-      File : 3400_PCB_V1_Mechanical_1.gbr
-
-    Adding Layer      : Mechanical 1
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
-Generating : Mechanical 3
-      File : 3400_PCB_V1_Mechanical_3.gbr
-
-    Adding Layer      : Mechanical 3
-
-
-Used DCodes :
-    D11
-*************************************************************
-
-*************************************************************
-Generating : Bottom Assembly
-      File : 3400_PCB_V1_Bottom_Assembly.gbr
-
-    Adding Layer      : Bottom Assembly
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
-Generating : Top 3D Body
-      File : 3400_PCB_V1_Top_3D_Body.gbr
-
-    Adding Layer      : Top 3D Body
-
-
-Used DCodes :
-    D13
-    D68
-*************************************************************
-
-*************************************************************
-Generating : Bottom Component Center
-      File : 3400_PCB_V1_Bottom_Component_Center.gbr
-
-    Adding Layer      : Bottom Component Center
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
 Generating : Bottom 3D Body
       File : 3400_PCB_V1_Bottom_3D_Body.gbr
 
@@ -257,97 +12,16 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
-Generating : Top Assembly
-      File : 3400_PCB_V1_Top_Assembly.gbr
+Generating : Top Courtyard
+      File : 3400_PCB_V1_Top_Courtyard.gbr
 
-    Adding Layer      : Top Assembly
+    Adding Layer      : Top Courtyard
 
 
 Used DCodes :
     D13
-    D14
-*************************************************************
-
-*************************************************************
-Generating : Bottom Pad Master
-      File : 3400_PCB_V1_Pads_Bot.gbr
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D44
-    D45
-    D46
-    D54
-    D55
-    D58
-    D59
-    D60
-    D61
-    D62
-    D63
-    D64
-    D65
-    D66
-*************************************************************
-
-*************************************************************
-Generating : Bottom Layer
-      File : 3400_PCB_V1_Copper_Signal_Bot.gbr
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D11
-    D44
-    D45
-    D46
-    D54
-    D55
-    D58
-    D59
-    D60
-    D61
-    D62
-    D63
-    D64
-    D65
-    D66
-    D67
-*************************************************************
-
-*************************************************************
-Generating : Bottom Solder
-      File : 3400_PCB_V1_Soldermask_Bot.gbr
-
-    Adding Layer      : Bottom Solder
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D44
-    D45
-    D46
-    D47
-    D48
-    D49
-    D50
-    D51
-    D52
-    D53
-    D54
-    D55
-    D56
-    D57
+    D73
+    D74
 *************************************************************
 
 *************************************************************
@@ -362,17 +36,14 @@ Generating : Top Solder
 
 
 Used DCodes :
-    D18
-    D19
-    D20
-    D21
     D22
     D23
+    D24
+    D25
+    D26
+    D27
     D28
-    D29
-    D30
-    D31
-    D32
+    D33
     D34
     D35
     D36
@@ -397,19 +68,257 @@ Used DCodes :
     D55
     D56
     D57
+    D58
+    D59
+    D60
+    D61
+    D62
 *************************************************************
 
 *************************************************************
-Generating : Top Courtyard
-      File : 3400_PCB_V1_Top_Courtyard.gbr
+Generating : Top Layer
+      File : 3400_PCB_V1_Copper_Signal_Top.gbr
 
-    Adding Layer      : Top Courtyard
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D11
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D47
+    D48
+    D49
+    D50
+    D53
+    D54
+    D60
+    D63
+    D64
+    D65
+    D66
+    D67
+    D68
+    D69
+    D70
+    D71
+    D72
+*************************************************************
+
+*************************************************************
+Generating : Top Pad Master
+      File : 3400_PCB_V1_Pads_Top.gbr
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D47
+    D48
+    D49
+    D50
+    D53
+    D54
+    D60
+    D63
+    D64
+    D65
+    D66
+    D67
+    D68
+    D69
+    D70
+    D71
+*************************************************************
+
+*************************************************************
+Generating : Top Component Center
+      File : 3400_PCB_V1_Top_Component_Center.gbr
+
+    Adding Layer      : Top Component Center
+
+
+Used DCodes :
+    D73
+*************************************************************
+
+*************************************************************
+Generating : Bottom Paste
+      File : 3400_PCB_V1_Paste_Bot.gbr
+
+    Adding Layer      : Bottom Paste
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Bottom Overlay
+      File : 3400_PCB_V1_Legend_Bot.gbr
+
+    Adding Layer      : Bottom Overlay
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : 3400_PCB_V1_Mechanical_1.gbr
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 3
+      File : 3400_PCB_V1_Mechanical_3.gbr
+
+    Adding Layer      : Mechanical 3
+
+
+Used DCodes :
+    D11
+*************************************************************
+
+*************************************************************
+Generating : Top Assembly
+      File : 3400_PCB_V1_Top_Assembly.gbr
+
+    Adding Layer      : Top Assembly
 
 
 Used DCodes :
     D13
+    D14
+*************************************************************
+
+*************************************************************
+Generating : Top 3D Body
+      File : 3400_PCB_V1_Top_3D_Body.gbr
+
+    Adding Layer      : Top 3D Body
+
+
+Used DCodes :
+    D13
+    D73
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : 3400_PCB_V1_Soldermask_Bot.gbr
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+    D55
+    D56
+    D57
+    D58
+    D59
+    D60
+    D61
+    D62
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : 3400_PCB_V1_Copper_Signal_Bot.gbr
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D11
+    D49
+    D50
+    D53
+    D54
+    D60
+    D63
+    D64
+    D65
+    D66
+    D67
     D68
     D69
+    D70
+    D71
+    D72
+*************************************************************
+
+*************************************************************
+Generating : Bottom Assembly
+      File : 3400_PCB_V1_Bottom_Assembly.gbr
+
+    Adding Layer      : Bottom Assembly
+
+
+Used DCodes :
 *************************************************************
 
 *************************************************************
@@ -423,6 +332,106 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
+Generating : Top Paste
+      File : 3400_PCB_V1_Paste_Top.gbr
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : 3400_PCB_V1_Legend_Top.gbr
+
+    Adding Layer      : Top Overlay
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+*************************************************************
+
+*************************************************************
+Generating : Keep-Out Layer
+      File : 3400_PCB_V1_Keep-out.gbr
+
+    Adding Layer      : Keep-Out Layer
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Bottom Component Center
+      File : 3400_PCB_V1_Bottom_Component_Center.gbr
+
+    Adding Layer      : Bottom Component Center
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Bottom Pad Master
+      File : 3400_PCB_V1_Pads_Bot.gbr
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D49
+    D50
+    D53
+    D54
+    D60
+    D63
+    D64
+    D65
+    D66
+    D67
+    D68
+    D69
+    D70
+    D71
+*************************************************************
+
+*************************************************************
 Generating : Drill Drawing
       File : 3400_PCB_V1_Drawing_1.gbr
 
@@ -432,8 +441,8 @@ Generating : Drill Drawing
 
 
 Used DCodes :
-    D70
-    D71
+    D75
+    D76
 *************************************************************
 
 *************************************************************
@@ -446,7 +455,7 @@ Generating : Drill Guide
 
 
 Used DCodes :
-    D70
+    D75
 *************************************************************
 
 *************************************************************
@@ -455,6 +464,6 @@ Generating : Profile
 
 
 Used DCodes :
-    D72
+    D77
 *************************************************************
 
