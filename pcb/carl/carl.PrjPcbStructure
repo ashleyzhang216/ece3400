@@ -1,3 +1,4 @@
 Record=TopLevelDocument|FileName=headers.SchDoc|SheetNumber=2
 Record=NoMainPathDocument|SourceDocument=headers.SchDoc|FileName=ic.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=headers.SchDoc|FileName=leds.SchDoc|SheetNumber=4
 Record=NoMainPathDocument|SourceDocument=headers.SchDoc|FileName=mic.SchDoc|SheetNumber=3

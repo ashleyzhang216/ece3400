@@ -5,6 +5,7 @@
 // Shift register pins
 #define clockPin  7     // clock pin
 #define dataPin   6     // data pin
+#define latchPin  21
 
 // Pins on 7-degment display, one for each digit
 #define Digit1    5
@@ -23,7 +24,7 @@ int period_refresh_disp = 311; //for 5ms
 
 void setup()
 {
-  //Serial.begin(9600);
+  Serial.begin(9600);
   pinMode(Digit1, OUTPUT);
   pinMode(Digit2, OUTPUT);
   pinMode(Digit3, OUTPUT);
@@ -53,12 +54,25 @@ void setup()
 
   /* enable global interrupts */
   sei();
+  cli();
 }
 
 
 void loop()
 {
-  numToDisplay = 10; // Number to display on the 7-segment display
+  numToDisplay = 2468; // Number to display on the 7-segment display
+
+  //digitalWrite(latchPin, LOW);
+  shiftOut(dataPin, clockPin, MSBFIRST, 0xEF);
+  //digitalWrite(latchPin, HIGH);
+  
+  //digitalWrite(clockPin, HIGH);
+  //digitalWrite(clockPin, LOW);
+  
+  digitalWrite(Digit1, LOW);  // turn on digit 1
+  digitalWrite(Digit2, LOW);  // turn on digit 2
+  digitalWrite(Digit3, LOW);  // turn on digit 3
+  digitalWrite(Digit4, LOW);  // turn on digit 4  
 }
 
 
@@ -67,25 +81,27 @@ ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed inte
 
   display_OFF();  // turn off the display
 
+  Serial.println(digitBeingWritten);
+  
   switch (digitBeingWritten)
   {
     case 1:
-      disp(numToDisplay / 1000);   // isolate left thousand digit
+      disp(numToDisplay / 1000, false);   // isolate left thousand digit
       digitalWrite(Digit1, LOW);  // turn on digit 1
       break;
 
     case 2:
-      disp( (numToDisplay / 100) % 10 );   // isolate hundred digit
+      disp( (numToDisplay / 100) % 10, false );   // isolate hundred digit
       digitalWrite(Digit2, LOW);     // turn on digit 2
       break;
 
     case 3:
-      disp( (numToDisplay / 10) % 10 );   // isolate tens digit
+      disp( (numToDisplay / 10) % 10, false );   // isolate tens digit
       digitalWrite(Digit3, LOW);    // turn on digit 3
       break;
 
     case 4:
-      disp(numToDisplay % 10);   // isolate unit digit
+      disp(numToDisplay % 10, false);   // isolate unit digit
       digitalWrite(Digit4, LOW);  // turn on digit 4
   }
 
@@ -103,7 +119,11 @@ ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed inte
 // displayDecimalPoint = 1: DP is on.
 void disp(byte numberToDisplay, bool displayDecimalPoint)
 {
-  switch (2468)
+  //Serial.println(numberToDisplay);
+  
+  return;
+  
+  switch (numberToDisplay)
   {
     case 0:  // display a 0
       shiftOut(dataPin, clockPin, MSBFIRST, 0x02 | !displayDecimalPoint);
