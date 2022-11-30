@@ -3,6 +3,7 @@
 
 #include <Servo.h>
 #include "ultrasonic.h"
+#include "utility.h"
 
 double k_p = 5;
 double k_i = 0;
@@ -92,7 +93,7 @@ void move_forward_pid(double secs) {
     prev_error = error;
     prev_time = cur_time;
 
-    delay(1);
+    delay_ms(1);
   }
   
   stop_servos();
