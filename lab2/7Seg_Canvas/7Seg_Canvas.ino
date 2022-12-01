@@ -3,15 +3,14 @@
 
 
 // Shift register pins
-#define clockPin 7   // clock pin
-#define dataPin 6 // data pin
+#define clockPin 7 // clock pin
+#define dataPin  6 // data pin
 
 // Pins on 7-degment display, one for each digit
-#define Digit1 5   
-#define Digit2 4   
-#define Digit3 3   
-#define Digit4 2   
-
+#define Digit1   5
+#define Digit2   4
+#define Digit3   3
+#define Digit4   2
 
 byte digitBeingWritten;
 volatile int numToDisplay;
@@ -67,6 +66,8 @@ ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed inte
 
   display_OFF();  // turn off the display
 
+  Serial.println(digitBeingWritten);
+
   switch (digitBeingWritten)
   {
     case 1:
@@ -87,6 +88,7 @@ ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed inte
     case 4:
       disp(numToDisplay % 10);   // isolate unit digit
       digitalWrite(Digit4, LOW);  // turn on digit 4
+      break;
   }
 
   digitBeingWritten = (digitBeingWritten % 4) + 1;
@@ -103,6 +105,16 @@ ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed inte
 // displayDecimalPoint = 1: DP is on.
 void disp(byte numberToDisplay, bool displayDecimalPoint)
 {
+
+  return;
+
+  shiftOut(dataPin, clockPin, MSBFIRST, 0x9E | !displayDecimalPoint);
+  digitalWrite(clockPin, HIGH);
+  delay(1);
+  digitalWrite(clockPin, LOW);
+
+  return;
+  
   switch (numberToDisplay)
   {
     case 0:  // display a 0
