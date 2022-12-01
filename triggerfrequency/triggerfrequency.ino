@@ -130,11 +130,11 @@ void loop() {
 
     // 
     if (fft_log_out[48] > 40) {
-      cli();
       bool heardnote = true;
      }    
      else {
       bool heard = false;
      }
+    sei();
   }
 }
