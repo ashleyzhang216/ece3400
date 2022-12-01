@@ -4,12 +4,14 @@
 #include "ultrasonic.h"
 #include "motors.h"
 #include "led.h"
+#include "mic.h"
+#include "phototrans.h"
 
 void ultrasonic_test() {
   calculateDistances();
   Serial.println("Left 1: " + String(distanceToObject[0]) + ", Front: " + String(distanceToObject[1]) + ", Right: " + String(distanceToObject[2]) + ", Left 2: " + String(distanceToObject[3]));
   //Serial.println("Total: " + String(distanceToObject[0] + distanceToObject[2]) + ", Left: " + String(distanceToObject[0]) + ", Right: " + distanceToObject[2]);
-  delay(250);
+  delay_ms(250);
 }
 
 void pid_test() {
@@ -19,6 +21,17 @@ void pid_test() {
 void motor_test() {
   move_L_servo(FORWARD, 100);
   move_R_servo(FORWARD, 100);
+}
+
+void mic_test() {
+  if(listen_for_440()) {
+    Serial.println("Heard 440hz!");
+  }
+}
+
+void phototrans_test() {
+  Serial.println(check_treasure());
+  //Serial.println("Left: " + String(left_pt()) + ", Front: " + String(front_pt()) + ", Right: " + String(right_pt()));
 }
 
 #endif

@@ -217,4 +217,20 @@ void mainInterruptFunction(bool stateOfPin, int IRQ_Number)
   }
 }
 
+float leftUS_1() {
+  return distanceToObject[0];
+}
+
+float frontUS() {
+  return distanceToObject[1];
+}
+
+float rightUS() {
+  return distanceToObject[2];
+}
+
+float leftUS_2() {
+  return distanceToObject[3];
+}
+
 #endif ULTRASONIC_H

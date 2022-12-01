@@ -9,8 +9,11 @@ double k_p = 5;
 double k_i = 0;
 double k_d = 2;
 
-double total_wall_distance = 24;
 int num_vals_i = 250;
+
+double front_wall_threshold = 6;
+double single_wall_distance = 11;
+double max_us_reading = 30;
 
 enum move_dir {
   FORWARD, 
@@ -60,6 +63,7 @@ void move_forward_pid(double secs) {
   double elapsed_time;
   double cum_error, derv_error;
   double out;
+  bool left_valid, right_valid;
   
   int prev_errors[num_vals_i];
   int prev_err_ctr = 0;
@@ -69,12 +73,25 @@ void move_forward_pid(double secs) {
     elapsed_time = cur_time - prev_time;
 
     calculateDistances();
-    error = distanceToObject[2] - distanceToObject[0];// - abs(distanceToObject[0] + distanceToObject[2] - total_wall_distance);
+    left_valid = leftUS_1() != 0 && leftUS_1() < max_us_reading;
+    right_valid = rightUS() != 0 && rightUS() < max_us_reading;
+    
+    if(!left_valid && !right_valid) {
+      error = 0;
+    } else if(!left_valid) {
+      error = 2*(rightUS() - single_wall_distance);
+      Serial.println(error);
+    } else if(!right_valid) {
+      error = 2*(single_wall_distance - leftUS_1());
+      Serial.println(error);
+    } else {
+      error = rightUS() - leftUS_1();
+    }
+    //error = distanceToObject[2] - distanceToObject[0];
+    
     
     cum_error += error * elapsed_time/1000;
     derv_error = (error - prev_error) / elapsed_time;
-
-    Serial.println(String(prev_err_ctr) + ": " + String(error));
     
     prev_errors[prev_err_ctr] = error;
     prev_err_ctr = (prev_err_ctr == num_vals_i - 1) ? 0 : prev_err_ctr + 1;
@@ -97,6 +114,10 @@ void move_forward_pid(double secs) {
   }
   
   stop_servos();
+}
+
+void move_forward() {
+  
 }
 
 void motor_setup() {
