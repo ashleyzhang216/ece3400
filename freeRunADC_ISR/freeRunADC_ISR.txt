@@ -1,0 +1,7 @@
+Upload to robot
+
+play sound while reading from serial monitor
+
+copy FFT data into text file
+
+run text file on Jupyter Notebook to observe the signal frequency peak 
