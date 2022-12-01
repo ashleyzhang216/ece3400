@@ -3,14 +3,14 @@
 
 
 // Shift register pins
-#define clockPin     // clock pin
-#define dataPin      // data pin
+#define clockPin 7   // clock pin
+#define dataPin 6 // data pin
 
 // Pins on 7-degment display, one for each digit
-#define Digit1   
-#define Digit2    
-#define Digit3    
-#define Digit4    
+#define Digit1 5   
+#define Digit2 4   
+#define Digit3 3   
+#define Digit4 2   
 
 
 byte digitBeingWritten;
@@ -58,7 +58,7 @@ void setup()
 
 void loop()
 {
-  numToDisplay = 10; // Number to display on the 7-segment display
+  numToDisplay = 2468; // Number to display on the 7-segment display
 }
 
 
