@@ -10,8 +10,10 @@
 
 #include "testing.h"
 
+volatile bool manual_override = false;
+
 void manual_start_ISR() {
-  toggle_led();
+  manual_override = true;
 }
 
 void setup() {
@@ -20,8 +22,8 @@ void setup() {
   motor_setup();
   led_setup();
   navigation_setup();
-  mic_setup();
   phototrans_setup();
+  mic_setup();
 
   // attach interrupt for manual start button
   attachInterrupt(digitalPinToInterrupt(MANUAL_START), manual_start_ISR, FALLING);
@@ -49,6 +51,12 @@ void final_code() {
   //   update position & stack
   //  
   // celebrate
+
+  while(!listen_for_440() && !manual_override);
+
+  blink_led(500);
+
+  while(1) {}
 
   double treasure_freq;
   pos bot_pos = initial_pos;
@@ -87,5 +95,7 @@ void loop() {
   //motor_test();
   //toggle_led();
   //mic_test();
-  phototrans_test();
+  //phototrans_test();
+
+  final_code();
 }

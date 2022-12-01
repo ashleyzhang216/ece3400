@@ -21,12 +21,14 @@ int temp_ctrla, temp_ctrlc, muxpos;
 // period = (.41667/1000) * 16000000 / 64 - 1 ~= 103
 int period_refresh_disp = 103; 
 
-void adc_setup() {
-
+void save_adc() {
   // store initial adc values
   temp_ctrla = ADC0.CTRLA;
   temp_ctrlc = ADC0.CTRLC;
   muxpos = ADC0.MUXPOS;
+}
+
+void adc_setup() {
   
   /* Disable digital input buffer */
   PORTD.PIN5CTRL &= ~PORT_ISC_gm;
@@ -91,24 +93,29 @@ ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed inte
   TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
 }
 
-void mic_setup() {
-  // put your setup code here, to run once:
-
-  // for printing later
-  //Serial.begin(9600);
-  
+void listen_setup() {  
   adc_setup();
   interrupt_setup();
 }
 
+void mic_setup() {
+  save_adc();
+  listen_setup();
+}
+
 bool listen_for_440() {
+  // put your main code here, to run repeatedly:
+
   bool return_val = false;
-  while(counter <= 256) {}
-  
+
+  listen_setup();
+
+  counter = 0;
+  while(counter <= 256);
+
   // when we get all of the adc values
   if(counter > 256) {
-    // disable TCA
-    cli();
+    //TCA0.SINGLE.CTRLA = ~TCA_SINGLE_ENABLE_bm; // Disable TCA
 
     // restore ADC values
     ADC0.CTRLA = temp_ctrla;
@@ -127,15 +134,23 @@ bool listen_for_440() {
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
 
-    Serial.println("440: " + String(fft_log_out[48]));
+//    Serial.println("Results:");
+//    for(int i = 0; i < 128; i++) {
+//      Serial.println(String(i) + ": " + String(fft_log_out[i]));
+//    }
     
     if (fft_log_out[48] > 40) {
+      Serial.println("440 Hz identified");
       return_val = true;
-     }    
-    sei();
+    } 
+    else {
+      Serial.println("Value: " + String(fft_log_out[48]));
+      adc_setup(); // re-enable TCA
+      //TCA0.SINGLE.CTRLA = TCA_SINGLE_ENABLE_bm; // Re-enable TCA
+      counter = 0;
+    }
   }
 
-  counter = 0;
   return return_val;
 }
 

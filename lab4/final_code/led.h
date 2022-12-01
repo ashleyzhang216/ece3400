@@ -8,7 +8,18 @@ bool led_on;
 
 void led_setup() {
   pinMode(LED_CONTROL, OUTPUT);
+  digitalWrite(LED_CONTROL, LOW);
   led_on = false;
+}
+
+void off_led() {
+  digitalWrite(LED_CONTROL, LOW);
+  led_on = false;
+}
+
+void on_led() {
+  digitalWrite(LED_CONTROL, HIGH);
+  led_on = true;
 }
 
 void toggle_led() {
@@ -21,11 +32,11 @@ void toggle_led() {
   }
 }
 
-void found_treasures() {
-  while(1) {
-    toggle_led();
-    delay_ms(250);
-  }
+void blink_led(int ms) {
+  digitalWrite(LED_CONTROL, HIGH);
+  delay_ms(ms);
+  digitalWrite(LED_CONTROL, LOW);
+  led_on = false;
 }
 
 #endif
