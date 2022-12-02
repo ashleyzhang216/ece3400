@@ -18,6 +18,8 @@ void manual_start_ISR() {
 
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
+
   ultrasonic_setup();
   motor_setup();
   led_setup();
@@ -27,8 +29,6 @@ void setup() {
 
   // attach interrupt for manual start button
   attachInterrupt(digitalPinToInterrupt(MANUAL_START), manual_start_ISR, FALLING);
-
-  Serial.begin(9600);
 }
 
 void final_code() {
@@ -56,14 +56,15 @@ void final_code() {
 
   blink_led(500);
 
-  while(1) {}
-
   double treasure_freq;
   pos bot_pos = initial_pos;
   StackArray<int> backtrack_stack;
   StackArray<int> frontier_stack;
+  int n;
   
   while(!found_2_treasures()) {
+
+    Serial.println("At square " + String(square_num(bot_pos)));
 
     // check for treasures
     treasure_freq = check_treasure();
@@ -76,12 +77,49 @@ void final_code() {
     // add current square to visited
     visited[square_num(bot_pos)] = true;
 
+    calculateDistances();
+
+    Serial.print("Distances: ");
+    for(int i = 0; i < 3; i++) {
+      Serial.print(String(distanceToObject[i]) + ", ");
+    }
+    Serial.println();
+
+    for(int i = 0; i < 3; i++) {
+      n = neighbor(bot_pos, dir_from_bot(bot_pos, i));
+
+      if(n != -1) {
+        if(!near_zero(distanceToObject[i]) && distanceToObject[i] <= max_us_reading) {
+          Serial.println("Marked neighbor " + String(n) + " as Inaccessible");
+          mark_inaccessible(bot_pos, i);
+        } else {
+          Serial.println("Marked neighbor " + String(n) + " as Accessible");
+          if(!in_stack[n] && !visited[n]) {
+            Serial.println("Added neighbor " + String(n) + " to stack");
+            in_stack[n] = true;
+            frontier_stack.push(n);
+          }
+        }
+      }
+    }
+
+    while(!is_accessible(square_num(bot_pos), frontier_stack.peek())) {
+      Serial.println("Backtracking to square " + String(backtrack_stack.peek()));
+      bot_pos = travel_to(bot_pos, backtrack_stack.peek());
+      backtrack_stack.pop();
+    }
+
     // add current square to backtrack stack
     backtrack_stack.push(square_num(bot_pos));
 
-    calculateDistances();
+    Serial.println("Traveling to square " + String(frontier_stack.peek()));
 
-    
+    in_stack[frontier_stack.peek()] = false;
+    visited [frontier_stack.peek()] = true;
+    bot_pos = travel_to(bot_pos, frontier_stack.peek());
+    frontier_stack.pop();
+
+    Serial.println("--------------------------------------------------");
   }
 
   celebrate();
@@ -96,6 +134,10 @@ void loop() {
   //toggle_led();
   //mic_test();
   //phototrans_test();
+
+//  while(!manual_override) {}
+//  delay_ms(1000);
+//  turn_test();
 
   final_code();
 }

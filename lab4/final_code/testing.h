@@ -15,7 +15,7 @@ void ultrasonic_test() {
 }
 
 void pid_test() {
-  move_forward_pid(10);
+  move_forward();
 }
 
 void motor_test() {
@@ -41,6 +41,15 @@ void mic_test() {
 void phototrans_test() {
   Serial.println(check_treasure());
   //Serial.println("Left: " + String(left_pt()) + ", Front: " + String(front_pt()) + ", Right: " + String(right_pt()));
+}
+
+void turn_test() {
+  for(int i = 0; i < 3; i++) {
+    move_forward();
+    delay_ms(2000);
+  }
+
+  while(1) {}
 }
 
 #endif
