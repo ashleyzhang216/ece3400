@@ -140,11 +140,11 @@ bool listen_for_440() {
 //    }
     
     if (fft_log_out[48] > 40) {
-      Serial.println("440 Hz identified");
+      //Serial.println("440 Hz identified");
       return_val = true;
     } 
     else {
-      Serial.println("Value: " + String(fft_log_out[48]));
+      //Serial.println("Value: " + String(fft_log_out[48]));
       adc_setup(); // re-enable TCA
       //TCA0.SINGLE.CTRLA = TCA_SINGLE_ENABLE_bm; // Re-enable TCA
       counter = 0;
