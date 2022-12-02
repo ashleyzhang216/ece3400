@@ -24,8 +24,17 @@ void motor_test() {
 }
 
 void mic_test() {
-  if(listen_for_440()) {
-    Serial.println("Heard 440hz!");
+  while(1) {
+    if(listen_for_440()) {
+      Serial.println("Heard 440hz!");
+      on_led();
+      Serial.println("before delay");
+      delay_ms(500);
+      Serial.println("after delay");
+      off_led();
+
+      while(1) {}
+    }
   }
 }
 
