@@ -6,6 +6,7 @@
 #include "led.h"
 #include "mic.h"
 #include "phototrans.h"
+#include "rf.h"
 
 void ultrasonic_test() {
   calculateDistances();
@@ -39,7 +40,11 @@ void mic_test() {
 }
 
 void phototrans_test() {
-  Serial.println(check_treasure());
+  double treasure_freq;
+  for(int i = 0; i < 3; i++) {
+    treasure_freq = check_treasure();
+  }
+  Serial.println(treasure_freq);
   //Serial.println("Left: " + String(left_pt()) + ", Front: " + String(front_pt()) + ", Right: " + String(right_pt()));
 }
 
@@ -50,6 +55,25 @@ void turn_test() {
   }
 
   while(1) {}
+}
+
+void rf_test() {
+  float send_val = 100.5;
+  bool send_status;
+
+  for(int i = 0; i < 22; i++) {
+    Serial.print("Sending " + String(send_val) + ": ");
+    delay_ms(100);
+    do {
+      send_status = transmit_to_base(send_val);
+      Serial.print(send_status ? "1" : "0");
+    } while(!send_status);
+    Serial.println();
+    
+    send_val += 101;
+
+    delay_ms(1000);
+  }
 }
 
 #endif
