@@ -58,7 +58,7 @@ void turn_test() {
 }
 
 void rf_test() {
-  float send_val = 100.5;
+  float send_val = 1000.5;
   bool send_status;
 
   for(int i = 0; i < 22; i++) {
@@ -70,7 +70,7 @@ void rf_test() {
     } while(!send_status);
     Serial.println();
     
-    send_val += 101;
+    send_val += 1001;
 
     delay_ms(1000);
   }

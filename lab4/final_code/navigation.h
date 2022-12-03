@@ -3,8 +3,8 @@
 
 #include "utility.h"
 
-#define MAZE_X 3
-#define MAZE_Y 3
+#define MAZE_X 5
+#define MAZE_Y 4
 
 enum bot_dir {
   NORTH,

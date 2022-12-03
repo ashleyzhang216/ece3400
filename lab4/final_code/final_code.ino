@@ -141,7 +141,7 @@ void loop() {
   //toggle_led();
   //mic_test();
   //phototrans_test();
-  rf_test();
+  //rf_test();
 
-  //final_code();
+  final_code();
 }
