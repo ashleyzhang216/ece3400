@@ -7,6 +7,7 @@
 #include "mic.h"
 #include "phototrans.h"
 #include "celebrate.h"
+#include "rf.h"
 
 #include "testing.h"
 
@@ -26,6 +27,7 @@ void setup() {
   navigation_setup();
   phototrans_setup();
   mic_setup();
+  rf_setup();
 
   // attach interrupt for manual start button
   attachInterrupt(digitalPinToInterrupt(MANUAL_START), manual_start_ISR, FALLING);
@@ -56,7 +58,7 @@ void final_code() {
 
   blink_led(500);
 
-  double treasure_freq;
+  long treasure_freq;
   pos bot_pos = initial_pos;
   StackArray<int> backtrack_stack;
   StackArray<int> frontier_stack;
@@ -66,11 +68,15 @@ void final_code() {
 
     Serial.println("At square " + String(square_num(bot_pos)));
 
-    // check for treasures
-    treasure_freq = check_treasure();
+    // check for treasures, multiple times to clear error
+    for(int i = 0; i < 3; i++) {
+      treasure_freq = check_treasure();
+    }
     if(treasure_freq != -1) {
-      // TODO: transmit freq
+      on_led();
       update_treasure(treasure_freq);
+      //while(!transmit_to_base(treasure_freq)) {}
+      off_led();
       continue;
     }
 
@@ -107,6 +113,7 @@ void final_code() {
       Serial.println("Backtracking to square " + String(backtrack_stack.peek()));
       bot_pos = travel_to(bot_pos, backtrack_stack.peek());
       backtrack_stack.pop();
+      delay_ms(250);
     }
 
     // add current square to backtrack stack
@@ -134,10 +141,7 @@ void loop() {
   //toggle_led();
   //mic_test();
   //phototrans_test();
+  rf_test();
 
-//  while(!manual_override) {}
-//  delay_ms(1000);
-//  turn_test();
-
-  final_code();
+  //final_code();
 }

@@ -43,7 +43,7 @@ int square_num(int x, int y) {
 }
 
 bool found_2_treasures() {
-  return treasure[0] != 0 && treasure[1] != 0 && treasure[0] != treasure[1];
+  return treasure[0] != -1 && treasure[1] != -1 && treasure[0] != treasure[1];
 }
 
 void update_treasure(double freq) {

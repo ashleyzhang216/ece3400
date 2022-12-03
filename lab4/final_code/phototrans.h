@@ -11,8 +11,8 @@ float signal_pulse;
 
 int max_phototrans_readings = 5;
 
-int num_pt_readings = 50;
-int millis_between_pt_readings = 5;
+int num_pt_readings = 10;
+int microseconds_between_pt_readings = 5;
 
 void phototrans_setup() {
   // Program TCB for frequency measurements
@@ -29,9 +29,10 @@ void phototrans_setup() {
   sei();
 }
 
-double left_pt() {
+float left_pt() {
 
-  double reading = -1;
+  float reading;
+  StackArray<float> readings;
   
   // MEASURE FOR LEFT PT
 
@@ -57,22 +58,33 @@ double left_pt() {
       
       signal_pulse = TCB0.CCMP; // CCMP is the time between a rising edge and the next falling
   
-      reading = 16000000.0 / signal_pulse / 1000;
+      reading = 16000000.0 / signal_pulse;
   
       sei(); // Re-enable interrupts
   
       TCB0.INTFLAGS = 1; // This clears the TCB flag for the next PT
 
-      return reading;
+      readings.push(reading);
     }
   }
 
-  return reading;
+  if(readings.isEmpty()) return -1;
+
+  double sum = 0;
+  double num_readings = 0;
+
+  while(!readings.isEmpty()) {
+    sum += readings.pop();
+    num_readings++;
+  }
+
+  return sum / num_readings;
 }
 
-double front_pt() {
+float front_pt() {
 
-  double reading = -1;
+  float reading;
+  StackArray<float> readings;
 
   // MEASURE FOR FRONT PT
 
@@ -98,7 +110,7 @@ double front_pt() {
       
       signal_pulse = TCB0.CCMP; // CCMP is the time between a rising edge and the next falling
   
-      reading = 16000000.0 / signal_pulse / 1000;
+      reading = 16000000.0 / signal_pulse;
   
       sei(); // Re-enable interrupts
   
@@ -108,12 +120,23 @@ double front_pt() {
     }
   }
 
-  return reading;
+  if(readings.isEmpty()) return -1;
+
+  double sum = 0;
+  double num_readings = 0;
+
+  while(!readings.isEmpty()) {
+    sum += readings.pop();
+    num_readings++;
+  }
+
+  return sum / num_readings;
 }
 
-double right_pt() {
+float right_pt() {
   
-  double reading = -1;
+  float reading;
+  StackArray<float> readings;
 
   // MEASURE FOR RIGHT PT
 
@@ -140,7 +163,7 @@ double right_pt() {
       
       signal_pulse = TCB0.CCMP; // CCMP is the time between a rising edge and the next falling
 
-      reading = 16000000.0 / signal_pulse / 1000;
+      reading = 16000000.0 / signal_pulse;
   
       sei(); // Re-enable interrupts
   
@@ -150,11 +173,21 @@ double right_pt() {
     }
   }
 
-  return reading;
+  if(readings.isEmpty()) return -1;
+
+  double sum = 0;
+  double num_readings = 0;
+
+  while(!readings.isEmpty()) {
+    sum += readings.pop();
+    num_readings++;
+  }
+
+  return sum / num_readings;
 }
 
-double check_treasure() {
-  double pt_reading[3];
+float check_treasure() {
+  float pt_reading[3];
   for(int i = 0; i < num_pt_readings; i++) {
     pt_reading[0] = left_pt();
     if(pt_reading[0] != -1) return pt_reading[0];
@@ -164,8 +197,8 @@ double check_treasure() {
     
     pt_reading[2] = right_pt();
     if(pt_reading[2] != -1) return pt_reading[2];
-
-    delay_ms(millis_between_pt_readings);
+    
+    delayMicroseconds(microseconds_between_pt_readings);
   }
 
   return -1;
