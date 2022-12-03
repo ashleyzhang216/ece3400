@@ -93,12 +93,11 @@ void rf_setup(void)
 bool transmit_to_base(long numToDisplay)
 {
   bool tx_result;
+  failedSends  = 0;
   
   // Take note of the time, and send it. Also acts as a time stamp for the start of loop()
   unsigned long timeLoopStart = millis();
-  
-  //long numToDisplay = 12345.6 ; // This will be the frequency measured by the PT (freq)
-  
+    
   /*Serial.print("Now sending time value: ");
   Serial.print(timeLoopStart);
   Serial.println(" ms");*/
@@ -107,7 +106,6 @@ bool transmit_to_base(long numToDisplay)
   radio.stopListening();
 
   // Send data
-  //if (radio.write( &timeLoopStart, sizeof(timeLoopStart)) ) {
   if (radio.write( &numToDisplay, sizeof(numToDisplay)) ) {
     //Serial.println("Transmission OK!");
     tx_result = true;
@@ -118,6 +116,16 @@ bool transmit_to_base(long numToDisplay)
     tx_result = false;
   }
 
+//  while(!radio.write( &numToDisplay, sizeof(numToDisplay)) && failedSends < 100) {
+//    failedSends++;
+//  }
+
+  if(failedSends >= 100) {
+    tx_result = false;
+  } else {
+    tx_result = true;
+  }
+
   // Resume listening
   radio.startListening();
 
@@ -126,25 +134,25 @@ bool transmit_to_base(long numToDisplay)
   // Will we have a timeout?
   bool timeout = false;
 
-  while (!radio.available() && !timeout)
-    if (millis() - timeStartToWait > 200 ) {
+  while (!radio.available() && !timeout) {
+    if (millis() - timeStartToWait  > 200 ) {
       timeout = true;
     }
 
-  if (timeout) {
-    // try another attempt
-    //Serial.println("Nothing received from PRX...");
-  }
-  else {// Read what was sent back from PRX
-    unsigned long recvdFromPRX;
-    radio.read( &recvdFromPRX, sizeof(recvdFromPRX) );
-    printf("Received response from PRX: %lu, round-trip delay: %lu\n\r", 
-            recvdFromPRX, millis() - recvdFromPRX);
-            
+    if (timeout) {
+      // try another attempt
+      //Serial.println("Nothing received from PRX...");
+    }
+    else {// Read what was sent back from PRX
+      unsigned long recvdFromPRX;
+      radio.read( &recvdFromPRX, sizeof(recvdFromPRX) );
+      printf("Received response from PRX: %lu, round-trip delay: %lu\n\r", 
+              recvdFromPRX, millis() - recvdFromPRX); 
+    }
   }
 
   // Try again
-  delay_ms(2000); 
+  //delay_ms(2000); 
 
   return tx_result;
 }

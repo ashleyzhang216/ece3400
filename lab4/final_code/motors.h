@@ -5,7 +5,7 @@
 #include "ultrasonic.h"
 #include "utility.h"
 
-#define SECS_FOR_FORWARD 3
+#define MILLISECS_FOR_FORWARD 3400
 
 double k_p = 2.5;
 double k_i = 0;
@@ -13,7 +13,7 @@ double k_d = 1;
 
 int num_vals_i = 250;
 
-double front_wall_threshold = 10;
+double front_wall_threshold = 12;
 double single_wall_distance = 13.5;
 double max_us_reading = 30;
 
@@ -75,7 +75,7 @@ void move_forward() {
   int prev_left_enc = analogRead(L_SERVO_FB);
   int prev_right_enc = analogRead(R_SERVO_FB);
 
-  while( ( millis() - start_time) / 1000 < SECS_FOR_FORWARD || (!near_zero(frontUS()) && frontUS() > front_wall_threshold && frontUS() < max_us_reading ) ) {
+  while( ( millis() - start_time) < MILLISECS_FOR_FORWARD || (!near_zero(frontUS()) && frontUS() > front_wall_threshold && frontUS() < 40 ) ) {
     cur_time = millis();
     elapsed_time = cur_time - prev_time;
 

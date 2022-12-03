@@ -73,11 +73,18 @@ void final_code() {
       treasure_freq = check_treasure();
     }
     if(treasure_freq != -1) {
+      Serial.print("Transmitting frequency " + String(treasure_freq) + ": ");
       on_led();
       update_treasure(treasure_freq);
-      //while(!transmit_to_base(treasure_freq)) {}
+      while(!transmit_to_base(treasure_freq)) {
+        Serial.print("0");
+      }
+      Serial.println("1");
       off_led();
-      continue;
+
+      if(found_2_treasures()) {
+        continue;
+      }
     }
 
     // add current square to visited

@@ -35,11 +35,11 @@ int  treasure[2];
 // Y increasing upwards
 // robot starts in (4, 0)
 int square_num(pos p) {
-  return p.x + MAZE_Y*p.y;
+  return p.x + MAZE_X * p.y;
 }
 
 int square_num(int x, int y) {
-  return x + MAZE_Y * y;
+  return x + MAZE_X * y;
 }
 
 bool found_2_treasures() {
@@ -49,7 +49,7 @@ bool found_2_treasures() {
 void update_treasure(double freq) {
   if(treasure[0] == -1) {
     treasure[0] = freq;
-  } else {
+  } else if(DEBUG || abs(freq - treasure[0]) > 100) {
     treasure[1] = freq;
   }
 }
@@ -127,10 +127,12 @@ pos nav_turnL(pos p0) {
 }
 
 int neighbor(pos s0, bot_dir dir) {
+  Serial.println("Debug: " + String(s0.x) + ", " + String(s0.y) + ", " + String(dir));
   switch(dir) {
     case NORTH:
       if(s0.y != MAZE_Y - 1) {
         s0.y++;
+        Serial.println("Debug: NORTH " + String(s0.x) + ", " + String(s0.y) + ", " + String(square_num(s0)));
         return square_num(s0);
       } else return -1;
     case EAST:

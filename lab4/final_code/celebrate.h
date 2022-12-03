@@ -6,6 +6,7 @@
 #include "utility.h"
 
 void celebrate() {
+  Serial.println("Celebrating!");
   while(1) {
     toggle_led();
     delay_ms(500);
