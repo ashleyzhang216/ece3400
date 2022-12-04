@@ -133,20 +133,14 @@ bool listen_for_440() {
     fft_reorder(); // reorder the data before doing the fft
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
-
-//    Serial.println("Results:");
-//    for(int i = 0; i < 128; i++) {
-//      Serial.println(String(i) + ": " + String(fft_log_out[i]));
-//    }
     
     if (fft_log_out[48] > 40) {
       //Serial.println("440 Hz identified");
       return_val = true;
     } 
     else {
-      Serial.println("Value: " + String(fft_log_out[48]));
+      //Serial.println("Value: " + String(fft_log_out[48]));
       adc_setup(); // re-enable TCA
-      //TCA0.SINGLE.CTRLA = TCA_SINGLE_ENABLE_bm; // Re-enable TCA
       counter = 0;
     }
   }

@@ -3,9 +3,14 @@
 
 #include <Servo.h>
 #include "ultrasonic.h"
+#include "phototrans.h"
+#include "led.h"
+#include "rf.h"
 #include "utility.h"
 
-#define MILLISECS_FOR_FORWARD 3400
+#define MILLISECS_FOR_FORWARD 2000
+
+bool update_treasure(double freq);
 
 double k_p = 2.5;
 double k_i = 0;
@@ -70,10 +75,7 @@ void move_forward() {
   int prev_errors[num_vals_i];
   int prev_err_ctr = 0;
 
-  unsigned long left_acc = 0, right_acc = 0;
-  int left_progress, right_progress;
-  int prev_left_enc = analogRead(L_SERVO_FB);
-  int prev_right_enc = analogRead(R_SERVO_FB);
+  long treasure_freq;
 
   while( ( millis() - start_time) < MILLISECS_FOR_FORWARD || (!near_zero(frontUS()) && frontUS() > front_wall_threshold && frontUS() < 40 ) ) {
     cur_time = millis();
@@ -96,19 +98,6 @@ void move_forward() {
       error = rightUS() - leftUS_1();
     }
     
-    left_progress = analogRead(L_SERVO_FB) - prev_left_enc;
-    right_progress = analogRead(R_SERVO_FB) - prev_right_enc;
-
-    if(left_progress > 0 && left_progress < 50) {
-      left_acc += left_progress;
-    }
-    if(right_progress > 0 && right_progress < 50) {
-      right_acc += right_progress;
-    }
-
-    prev_left_enc = analogRead(L_SERVO_FB);
-    prev_right_enc = analogRead(R_SERVO_FB);
-    
     cum_error += error * elapsed_time/1000;
     derv_error = (error - prev_error) / elapsed_time;
     
@@ -129,31 +118,35 @@ void move_forward() {
     prev_error = error;
     prev_time = cur_time;
 
+    treasure_freq = quick_check_treasure();
+    if(treasure_freq != -1) {
+      if(update_treasure(treasure_freq)) {
+        stop_servos();
+        Serial.print("Transmitting frequency " + String(treasure_freq) + ": ");
+        on_led();
+        for(int i = 0; i < 10; i++) {
+          if(transmit_to_base(treasure_freq)) {
+            break;
+          } else Serial.print("0");
+        }
+        Serial.println("1");
+        off_led();
+        delay_ms(250);
+      }
+    }
+
     delay_ms(1);
   }
   
   stop_servos();
 
   return;
-  delay_ms(250);
-  
-  Serial.println(String(left_acc) + ", " + String(right_acc));
-  
-  if(left_acc > right_acc) {
-    move_R_servo(FORWARD, 50);
-    delay_ms( (left_acc - right_acc) / max_servo_fb * 1.44225 * 1000 );
-    stop_servos();
-  } else if(left_acc < right_acc) {
-    move_L_servo(FORWARD, 50);
-    delay_ms( (right_acc - left_acc) / max_servo_fb * 1.44225 * 1000 );
-    stop_servos();
-  }
 }
 
 void turnL() {
   move_L_servo(BACKWARD, 25);
   move_R_servo(FORWARD, 25);
-  delay_ms(1665);
+  delay_ms(1635);
   stop_servos();
   delay_ms(250);
 }
@@ -161,7 +154,7 @@ void turnL() {
 void turnR() {
   move_L_servo(FORWARD, 15);
   move_R_servo(BACKWARD, 15);
-  delay_ms(1825);
+  delay_ms(1760);
   stop_servos();
   delay_ms(250);
 }

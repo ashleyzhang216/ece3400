@@ -29,9 +29,7 @@ void mic_test() {
     if(listen_for_440()) {
       Serial.println("Heard 440hz!");
       on_led();
-      Serial.println("before delay");
       delay_ms(500);
-      Serial.println("after delay");
       off_led();
 
       while(1) {}
@@ -49,9 +47,22 @@ void phototrans_test() {
 }
 
 void turn_test() {
-  for(int i = 0; i < 3; i++) {
+  for(int i = 0; i < 4; i++) {
+    turnR();
+    delay_ms(250);
+  }
+  for(int i = 0; i < 4; i++) {
+    turnL();
+    delay_ms(250);
+  }
+
+  while(1) {}
+}
+
+void move_test() {
+  for(int i = 0; i < 4; i++) {
     move_forward();
-    delay_ms(2000);
+    delay_ms(250);
   }
 
   while(1) {}

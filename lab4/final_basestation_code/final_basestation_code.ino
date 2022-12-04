@@ -1,5 +1,6 @@
 #include "7seg.h"
 #include "rx.h"
+#include "utility.h"
 
 void setup() {
   // put your setup code here, to run once:
@@ -29,7 +30,7 @@ void loop(void)
       finished = true;
 
       // Delay PTX complete transaction with PRX
-      delay(20);
+      delay_ms(20);
 
     }
     // Stop listening so we can send to TRX what we received
