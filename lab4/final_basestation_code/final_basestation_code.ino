@@ -14,7 +14,7 @@ void loop(void)
   // is usually the next available payload's length.
   if (radio.available() ) {
 
-    unsigned long payloadReceived;
+    unsigned long payloadReceived; // frequency sent from robot
     
     bool finished = false;
     while (!finished) {
@@ -38,10 +38,13 @@ void loop(void)
     // Send what we received
     radio.write( &payloadReceived, sizeof(payloadReceived) );
     printf("Sent response to PTX.\n\r\n\n");
+    Serial.println("Sent response");
 
-    if(payloadReceived > 9999) {
-      numToDisplay = payloadReceived / 10;
-      kDecimal = true;
+    // if the frequency is more than 4-digits we want the
+    // frequency to be converted to kHz 
+    if(payloadReceived > 9999) { 
+      numToDisplay = payloadReceived / 10; 
+      kDecimal = true; // this turns the decimal after the 2nd digit on
     } else {
       numToDisplay = payloadReceived;
       kDecimal = false;
