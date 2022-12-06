@@ -17,6 +17,8 @@ int num_pt_readings = 10;
 
 int microseconds_between_pt_readings = 5;
 
+int num_quick_pt_readings = 2;
+int microseconds_between_quick_pt_readings = 1;
 
 void phototrans_setup() {
   // Program TCB for frequency measurements
@@ -213,6 +215,24 @@ float check_treasure() {
     if(pt_reading[2] != -1) return pt_reading[2];
     
     delayMicroseconds(microseconds_between_pt_readings);
+  }
+
+  return -1;
+}
+
+float quick_check_treasure() {
+  float pt_reading[3];
+  for(int i = 0; i < num_quick_pt_readings; i++) {
+    pt_reading[0] = left_pt();
+    if(pt_reading[0] != -1) return pt_reading[0];
+    
+    pt_reading[1] = front_pt();
+    if(pt_reading[1] != -1) return pt_reading[1];
+    
+    pt_reading[2] = right_pt();
+    if(pt_reading[2] != -1) return pt_reading[2];
+    
+    delayMicroseconds(microseconds_between_quick_pt_readings);
   }
 
   return -1;
