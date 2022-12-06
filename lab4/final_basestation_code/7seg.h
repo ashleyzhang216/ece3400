@@ -11,10 +11,10 @@
 #define Digit3    3
 #define Digit4    2
 
-byte digitBeingWritten;
+byte digitBeingWritten; // used in interrupt routine to display each digit
 long numToDisplay = 0; // This will be the frequency received from the PT/Robot
-bool kDecimal = false;
-volatile bool displayDecimalPoint;
+bool kDecimal = false; // Used when converting to kHz to turn on decimal after 2nd digit
+volatile bool displayDecimalPoint; // defined in disp function lines 101-103
 void disp(byte number, bool displayDecimalPoint = 0);
 
 // period = time_in_secs * 16000000/prescaler - 1
@@ -56,28 +56,16 @@ void seg_display_setup()
   /* enable global interrupts */
   sei();
   
-  if(numToDisplay > 9999) {
+  /*if(numToDisplay > 9999) {
     numToDisplay /= 10;
     kDecimal = true;
     Serial.println(">= 10,000 val");
-  } Serial.println(numToDisplay);
+  } Serial.println(numToDisplay);*/
 }
 
 ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed interrupt
 {
   display_OFF();  // turn off the display
-
-  // If the number is > 9999, then it will be displayed with a decimal point
-  // Ex. 98765 will be displayed as 98.76, where kilo is implied
-  
-//  if (numToDisplay > 9999) {
-//    numToDisplay = numToDisplay/10;
-//    kDecimal = true;
-//    displayDecimalPoint = kDecimal;
-//  } else {
-//    kDecimal = false;
-//    displayDecimalPoint = kDecimal;
-//  }
   
   switch (digitBeingWritten)
   {
