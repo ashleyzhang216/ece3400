@@ -59,7 +59,7 @@ bool update_treasure(double freq) {
   if(treasure[0] == -1) {
     treasure[0] = freq;
     return true;
-  } else if(DEBUG || abs(freq - treasure[0]) > 100) {
+  } else if(DEBUG || abs(freq - treasure[0]) > 3000) {
     treasure[1] = freq;
     return true;
   }

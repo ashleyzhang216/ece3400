@@ -32,12 +32,6 @@ float payloadReceived;
 
 void rx_setup(void)
 {
-
-  //Serial.begin(57600);
-  //printf_begin();
-  //printf("\nSetup started\n\r");
-  //Serial.println("ROLE: Receiver");
-
   //
   // Setup and configure rf radio
   //
@@ -83,8 +77,6 @@ void rx_setup(void)
 
   // Print the configuration of the transceiver for debugging
   radio.printPrettyDetails();
-  //Serial.println("\n\n");
-  //Serial.println("Setup complete.");
 }
 
 #endif

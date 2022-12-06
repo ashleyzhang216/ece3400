@@ -116,7 +116,6 @@ bool listen_for_440() {
 
   // when we get all of the adc values
   if(counter > 256) {
-    //TCA0.SINGLE.CTRLA = ~TCA_SINGLE_ENABLE_bm; // Disable TCA
 
     // restore ADC values
     ADC0.CTRLA = temp_ctrla;
@@ -136,11 +135,9 @@ bool listen_for_440() {
     fft_mag_log(); // take the output of the fft
     
     if (fft_log_out[48] > 40) {
-      //Serial.println("440 Hz identified");
       return_val = true;
     } 
     else {
-      //Serial.println("Value: " + String(fft_log_out[48]));
       adc_setup(); // re-enable TCA
       counter = 0;
     }

@@ -55,12 +55,6 @@ void seg_display_setup()
 
   /* enable global interrupts */
   sei();
-  
-  /*if(numToDisplay > 9999) {
-    numToDisplay /= 10;
-    kDecimal = true;
-    Serial.println(">= 10,000 val");
-  } Serial.println(numToDisplay);*/
 }
 
 ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed interrupt

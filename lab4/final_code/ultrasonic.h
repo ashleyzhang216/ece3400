@@ -135,7 +135,6 @@ void calculateDistances() {
 void ISR_Sensor1_left_1() // Left sensor 1
 {
   if (leftSensorIsRead_1 == false) {
-    //byte readEchoPin = bitRead(PORTC.IN, 6); //  leftEchoPin_1 = 4;
     byte readEchoPin = bitRead(PORTE.IN, 3); // leftEchoPin_1 = 8;
     mainInterruptFunction(readEchoPin, 0);
     if (pulseIsMeasured) { // left sensor value has been read
@@ -151,7 +150,6 @@ void ISR_Sensor1_left_1() // Left sensor 1
 void ISR_Sensor2_forward() // Forward sensor
 {
   if ( forwardSensorIsRead == false) {
-    //byte readEchoPin = bitRead(PORTA.IN, 1); // forwardEchoPin = 7;
     byte readEchoPin = bitRead(PORTC.IN, 6); // forwardEchoPin = 4;
     mainInterruptFunction(readEchoPin, 1);
     if (pulseIsMeasured) { // forward sensor value has been read
@@ -167,7 +165,6 @@ void ISR_Sensor2_forward() // Forward sensor
 void ISR_Sensor3_right() // Right Sensor
 {
   if ( rightSensorIsRead == false) {
-    //byte readEchoPin = bitRead(PORTE.IN, 3); //rightEchoPin = 8;
     byte readEchoPin = bitRead(PORTA.IN, 1); // rightEchoPin = 7;
     mainInterruptFunction(readEchoPin, 2);
     if (pulseIsMeasured) { // right sensor value has been read
@@ -183,7 +180,6 @@ void ISR_Sensor3_right() // Right Sensor
 void ISR_Sensor4_left_2() // Left sensor 2
 {
   if (leftSensorIsRead_2 == false) {
-    //byte readEchoPin = bitRead(PORTC.IN, 6); //  leftEchoPin_2 = 4;
     byte readEchoPin = bitRead(PORTA.IN, 0); //  leftEchoPin_2 = 2;
     mainInterruptFunction(readEchoPin, 3);
     if (pulseIsMeasured) { // left sensor value has been read

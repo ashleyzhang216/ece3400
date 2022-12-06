@@ -11,7 +11,6 @@
 void ultrasonic_test() {
   calculateDistances();
   Serial.println("Left 1: " + String(distanceToObject[0]) + ", Front: " + String(distanceToObject[1]) + ", Right: " + String(distanceToObject[2]) + ", Left 2: " + String(distanceToObject[3]));
-  //Serial.println("Total: " + String(distanceToObject[0] + distanceToObject[2]) + ", Left: " + String(distanceToObject[0]) + ", Right: " + distanceToObject[2]);
   delay_ms(250);
 }
 

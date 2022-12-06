@@ -220,6 +220,7 @@ float check_treasure() {
   return -1;
 }
 
+// quicker version of check_treasure() to run while bot is moving
 float quick_check_treasure() {
   float pt_reading[3];
   for(int i = 0; i < num_quick_pt_readings; i++) {

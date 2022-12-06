@@ -162,16 +162,6 @@ void final_code() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
-  //ultrasonic_test();
-  //pid_test();
-  //motor_test();
-  //toggle_led();
-  //mic_test();
-  //phototrans_test();
-  //rf_test();
-  //turn_test();
-  //move_test();
 
   final_code();
 }

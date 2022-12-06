@@ -34,11 +34,6 @@ int failedSends = 0;
 void rf_setup(void)
 {
 
-  //Serial.begin(57600);
-  //printf_begin();
-  //printf("\nSetup started\n\r");
-  //Serial.println("ROLE: Transmitter\n");
-
   //
   // Setup and configure rf radio
   //
@@ -97,10 +92,6 @@ bool transmit_to_base(long numToDisplay) // frequency sent to base station
   
   // Take note of the time, and send it. Also acts as a time stamp for the start of loop()
   unsigned long timeLoopStart = millis();
-    
-  /*Serial.print("Now sending time value: ");
-  Serial.print(timeLoopStart);
-  Serial.println(" ms");*/
 
   // Stop listening because we want to send info over RF
   radio.stopListening();
@@ -115,10 +106,6 @@ bool transmit_to_base(long numToDisplay) // frequency sent to base station
     failedSends++;
     tx_result = false;
   }
-
-//  while(!radio.write( &numToDisplay, sizeof(numToDisplay)) && failedSends < 100) {
-//    failedSends++;
-//  }
 
   if(failedSends >= 100) {
     tx_result = false;
@@ -140,8 +127,7 @@ bool transmit_to_base(long numToDisplay) // frequency sent to base station
     }
 
     if (timeout) {
-      // try another attempt
-      //Serial.println("Nothing received from PRX...");
+      // do nothing
     }
     else {// Read what was sent back from PRX
       unsigned long recvdFromPRX;
@@ -150,9 +136,6 @@ bool transmit_to_base(long numToDisplay) // frequency sent to base station
               recvdFromPRX, millis() - recvdFromPRX); 
     }
   }
-
-  // Try again
-  //delay_ms(2000); 
 
   return tx_result;
 }
