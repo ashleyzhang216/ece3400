@@ -93,6 +93,7 @@ ISR(TCA0_OVF_vect)   // Interrupt routine that is called at every TCA timed inte
   TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
 }
 
+
 void listen_setup() {  
   adc_setup();
   interrupt_setup();
@@ -103,8 +104,8 @@ void mic_setup() {
   listen_setup();
 }
 
+// function to detect 440hz frequency
 bool listen_for_440() {
-  // put your main code here, to run repeatedly:
 
   bool return_val = false;
 

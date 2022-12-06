@@ -90,7 +90,7 @@ void rf_setup(void)
 
 }
 
-bool transmit_to_base(long numToDisplay)
+bool transmit_to_base(long numToDisplay) // frequency sent to base station
 {
   bool tx_result;
   failedSends  = 0;
